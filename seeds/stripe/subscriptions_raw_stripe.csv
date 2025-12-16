@@ -1,0 +1,13 @@
+id,customer,status,current_period_start,current_period_end,price_id
+sub_0001,cus_0001,trialing,1743141600,1774677600,price_annual
+sub_0002,cus_0001,trialing,1745906400,1748498400,price_monthly
+sub_0003,cus_0002,trialing,1740031200,1742623200,price_monthly
+sub_0004,cus_0002,active,1750485600,1782021600,price_annual
+sub_0005,cus_0003,canceled,1749103200,1762840800,price_monthly
+sub_0006,cus_0004,canceled,1762322400,1761631200,price_annual
+sub_0007,cus_0005,trialing,1742277600,1773813600,price_annual
+sub_0008,cus_0006,canceled,1739167200,1761631200,price_monthly
+sub_0009,cus_0007,trialing,1735538400,1738130400,price_monthly
+sub_0010,cus_0007,canceled,1745733600,1761717600,price_monthly
+sub_0011,cus_0008,trialing,1763100000,1794636000,price_annual
+sub_0012,cus_0008,trialing,1760335200,1791871200,price_annual

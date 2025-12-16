@@ -1,0 +1,75 @@
+version: 2
+
+models:
+  - name: stg_stripe__customers
+    description: "Standardized view of Stripe customers (synthetic billing data)."
+    columns:
+      - name: customer_id
+        description: "Synthetic Stripe customer ID."
+        tests:
+          - not_null
+          - unique
+      - name: customer_email
+        description: "Billing contact email for the customer."
+      - name: customer_name
+        description: "Customer (company) display name."
+      - name: customer_created_at
+        description: "Datetime when the customer was created in Stripe."
+      - name: customer_currency
+        description: "Default billing currency for the customer."
+
+  - name: stg_stripe__subscriptions
+    description: "Standardized view of Stripe subscriptions, with derived MRR/ARR."
+    columns:
+      - name: subscription_id
+        description: "Synthetic Stripe subscription ID."
+        tests:
+          - not_null
+          - unique
+      - name: customer_id
+        description: "Foreign key to stg_stripe__customers.customer_id."
+        tests:
+          - not_null
+      - name: subscription_status
+        description: "Stripe-like subscription status (active, canceled, trialing)."
+      - name: billing_period
+        description: "Billing period inferred from price_id (monthly, annual)."
+      - name: mrr_usd
+        description: "Estimated Monthly Recurring Revenue in USD."
+      - name: arr_usd
+        description: "Estimated Annual Recurring Revenue in USD."
+      - name: current_period_start_at
+        description: "Start datetime of the current billing period."
+      - name: current_period_end_at
+        description: "End datetime of the current billing period."
+      - name: is_active
+        description: "1 if the subscription is active, else 0."
+      - name: is_canceled
+        description: "1 if the subscription is canceled, else 0."
+      - name: is_trialing
+        description: "1 if the subscription is in trial, else 0."
+
+  - name: stg_stripe__invoices
+    description: "Standardized view of Stripe invoices / billing events."
+    columns:
+      - name: invoice_id
+        description: "Synthetic Stripe invoice ID."
+        tests:
+          - not_null
+          - unique
+      - name: customer_id
+        description: "Foreign key to stg_stripe__customers.customer_id."
+      - name: subscription_id
+        description: "Foreign key to stg_stripe__subscriptions.subscription_id."
+      - name: invoice_status
+        description: "Invoice status (paid, open, uncollectible)."
+      - name: amount_due
+        description: "Total amount billed on this invoice (in cents, USD)."
+      - name: amount_paid
+        description: "Amount actually paid on this invoice (in cents, USD)."
+      - name: currency
+        description: "Invoice currency."
+      - name: invoice_created_at
+        description: "Datetime when the invoice was created."
+      - name: is_paid
+        description: "Boolean flag (cast from paid) indicating if the invoice is fully paid."

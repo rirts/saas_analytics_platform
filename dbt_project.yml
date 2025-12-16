@@ -1,0 +1,36 @@
+name: "saas_analytics_platform"
+version: "1.0"
+config-version: 2
+
+profile: "saas_analytics_platform"
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+snapshot-paths: ["snapshots"]
+macro-paths: ["macros"]
+
+models:
+  saas_analytics_platform:
+    +materialized: view
+
+    staging:
+      +schema: "stg"
+
+    intermediate:
+      +schema: "int"
+
+    marts:
+      +schema: "marts"
+
+seeds:
+  saas_analytics_platform:
+    hubspot:
+      +schema: raw_hubspot
+      +column_types:
+        "Record ID": bigint
+    stripe:
+      +schema: raw_stripe
+    events:
+      +schema: raw_events

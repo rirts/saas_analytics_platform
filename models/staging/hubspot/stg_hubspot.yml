@@ -1,0 +1,63 @@
+version: 2
+
+models:
+  - name: stg_hubspot__deals
+    description: "Staging model for HubSpot deals export (B2B SaaS sales pipeline)."
+    columns:
+      - name: deal_id
+        description: "Deal surrogate ID from HubSpot Record ID."
+        tests:
+          - not_null
+          - unique
+      - name: deal_stage
+        description: "Stage of the deal in the sales pipeline (e.g. Cita programada, Propuesta aceptada, Cierre ganado)."
+      - name: is_deal_closed
+        description: "Flag indicating whether the deal is closed (won or lost) according to HubSpot."
+      - name: is_closed_won
+        description: "Flag for closed-won deals."
+      - name: is_closed_lost
+        description: "Flag for closed-lost deals."
+      - name: amount_company_currency
+        description: "Deal amount in the company currency, as stored in HubSpot."
+      - name: close_date_raw
+        description: "Close date of the deal as exported from HubSpot (string)."
+      - name: days_to_close
+        description: "Number of days from creation to close, computed by HubSpot."
+
+  - name: stg_hubspot__companies
+    description: "Staging model for HubSpot companies export (B2B SaaS accounts)."
+    columns:
+      - name: company_id
+        description: "HubSpot Record ID of the company."
+        tests:
+          - not_null
+          - unique
+      - name: company_name
+        description: "Name of the B2B account."
+      - name: company_domain
+        description: "Primary web domain of the company."
+      - name: saas_industry
+        description: "Custom SaaS industry classification used for segmentation."
+      - name: country
+        description: "Country/Region of the company as stored in HubSpot."
+
+  - name: stg_hubspot__contacts
+    description: "Staging model for HubSpot contacts export (decision makers & users)."
+    columns:
+      - name: contact_id
+        description: "HubSpot Record ID for the contact."
+        tests:
+          - not_null
+      - name: email
+        description: "Primary email address of the contact."
+        tests:
+          - not_null
+          - unique
+      - name: first_name
+        description: "First name of the contact."
+      - name: last_name
+        description: "Last name of the contact."
+      - name: lifecycle_stage
+        description: "Lifecycle stage in HubSpot (Lead, MQL, Customer, etc.)."
+      - name: associated_company_id
+        description: "HubSpot ID of the associated company, if present."

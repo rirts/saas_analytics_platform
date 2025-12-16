@@ -1,0 +1,21 @@
+version: 2
+
+sources:
+  - name: hubspot
+    schema: main_raw_hubspot   # OJO: usamos main_raw_hubspot (como sale en los logs)
+    tables:
+      - name: companies_raw_hubspot
+      - name: contacts_raw_hubspot
+      - name: deals_raw_hubspot
+
+  - name: stripe
+    schema: main_raw_stripe
+    tables:
+      - name: customers_raw_stripe
+      - name: invoices_raw_stripe
+      - name: subscriptions_raw_stripe
+
+  - name: events
+    schema: main_raw_events
+    tables:
+      - name: product_events_raw

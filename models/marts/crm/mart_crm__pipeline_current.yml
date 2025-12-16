@@ -1,0 +1,24 @@
+version: 2
+
+models:
+  - name: mart_crm__pipeline_current
+    description: "Current pipeline snapshot by deal stage, including counts and amount by deal_status."
+    columns:
+      - name: deal_stage
+        description: "Stage of the deal in the sales pipeline (as defined in HubSpot)."
+        tests:
+          - not_null
+      - name: deals_count
+        description: "Total number of deals in this stage."
+      - name: open_deals_count
+        description: "Number of open deals in this stage."
+      - name: won_deals_count
+        description: "Number of closed-won deals in this stage."
+      - name: lost_deals_count
+        description: "Number of closed-lost deals in this stage."
+      - name: open_amount_total
+        description: "Total amount (company currency) of open deals in this stage."
+      - name: won_amount_total
+        description: "Total amount (company currency) of closed-won deals in this stage."
+      - name: lost_amount_total
+        description: "Total amount (company currency) of closed-lost deals in this stage."

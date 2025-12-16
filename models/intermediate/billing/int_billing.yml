@@ -1,0 +1,69 @@
+version: 2
+
+models:
+  - name: int_billing__subscriptions_enriched
+    description: >
+      Enriched view of Stripe-like subscriptions, joining customer info
+      and aggregated invoices (count, totals, last invoice).
+    columns:
+      - name: subscription_id
+        description: "Synthetic Stripe subscription ID."
+        tests:
+          - not_null
+          - unique
+
+      - name: customer_id
+        description: "Foreign key to stg_stripe__customers.customer_id."
+        tests:
+          - not_null
+
+      - name: customer_name
+        description: "Customer display name from Stripe customers."
+
+      - name: customer_email
+        description: "Billing contact email."
+
+      - name: customer_currency
+        description: "Currency for billing (e.g. usd)."
+
+      - name: subscription_status
+        description: "Subscription status (active, canceled, trialing)."
+
+      - name: billing_period
+        description: "Billing period inferred from price_id (monthly, annual)."
+
+      - name: mrr_usd
+        description: "Estimated MRR for this subscription in USD."
+
+      - name: arr_usd
+        description: "Estimated ARR for this subscription in USD."
+
+      - name: current_period_start_at
+        description: "Start datetime of current billing period."
+
+      - name: current_period_end_at
+        description: "End datetime of current billing period."
+
+      - name: is_active
+        description: "1 if subscription is active, else 0."
+
+      - name: is_canceled
+        description: "1 if subscription is canceled, else 0."
+
+      - name: is_trialing
+        description: "1 if subscription is trialing, else 0."
+
+      - name: invoices_count
+        description: "Number of invoices associated with this subscription."
+
+      - name: total_invoiced_usd
+        description: "Total amount invoiced for this subscription (USD)."
+
+      - name: total_paid_usd
+        description: "Total amount actually paid for this subscription (USD)."
+
+      - name: last_invoice_at
+        description: "Datetime of the latest invoice for this subscription."
+
+      - name: has_any_paid_invoice
+        description: "1 if subscription has at least one paid invoice, else 0."

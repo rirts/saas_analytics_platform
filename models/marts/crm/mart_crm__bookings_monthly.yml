@@ -1,0 +1,16 @@
+version: 2
+
+models:
+  - name: mart_crm__bookings_monthly
+    description: "Monthly view of closed-won deals (bookings), including total amount and average sales cycle."
+    columns:
+      - name: booking_month
+        description: "First day of the month representing when deals were booked (closed-won)."
+        tests:
+          - not_null
+      - name: won_deals_count
+        description: "Number of closed-won deals in the month."
+      - name: won_amount_total
+        description: "Total closed-won amount (company currency) in the month."
+      - name: avg_sales_cycle_days
+        description: "Average sales cycle length in days for deals booked in the month."

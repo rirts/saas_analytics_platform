@@ -1,0 +1,17 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# dbt
+warehouse/dbt/target/
+warehouse/dbt/logs/
+
+# DuckDB database file
+warehouse/sql/analytics.duckdb
+
+# OS / editor
+.DS_Store
+*.swp
+.vscode/
+.idea/
