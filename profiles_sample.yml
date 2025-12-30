@@ -3,5 +3,5 @@ saas_analytics_platform:
   outputs:
     dev:
       type: duckdb
-      path: "warehouse/sql/analytics.duckdb"
+      path: "analytics.duckdb"
       threads: 4
