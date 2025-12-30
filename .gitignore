@@ -1,17 +1,34 @@
+# ----------------------------
 # Python
+# ----------------------------
 .venv/
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
 
-# dbt
-warehouse/dbt/target/
-warehouse/dbt/logs/
+# ----------------------------
+# dbt artifacts (repo root)
+# ----------------------------
+target/
+dbt_packages/
+logs/
 
-# DuckDB database file
-warehouse/sql/analytics.duckdb
+# Optional dbt user dirs (if they appear)
+.dbt/
 
-# OS / editor
+# ----------------------------
+# DuckDB (repo root)
+# ----------------------------
+analytics.duckdb
+*.duckdb
+*.duckdb.wal
+
+# ----------------------------
+# OS / Editor
+# ----------------------------
 .DS_Store
+Thumbs.db
 *.swp
 .vscode/
 .idea/
